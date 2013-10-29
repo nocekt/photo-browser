@@ -26,13 +26,6 @@
 // is copyright 2008 A Beautiful Site, LLC. 
 //
 
-
-    $("img").load(function() {
-		alert('x');
-	});
-
-
-
 if(jQuery) (function($){
 	
 	$.extend($.fn, {

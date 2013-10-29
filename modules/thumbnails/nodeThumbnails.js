@@ -1,6 +1,7 @@
 var fs = require('fs');
-var ext = { 'jpg':1 , 'jpeg':1 , 'JPG':1, 'JPEG':1 };
+var ext = { 'jpg':1 , 'jpeg':1 , 'JPG':1, 'JPEG':1, 'png':1, 'img':1 };
 var images = [];
+var thumbH = '120';
 
 function getThumbs(path) {
 	
@@ -26,37 +27,19 @@ var makeThumb = function(path, images, callback) {
 	var image = images[0];
 	if(image === 'undefined') return;
 	
-	runCommand('convert' ,['-thumbnail', 'x120', path + image, path + image+'.temp'], function(result, error) {
-		/*var data = fs.readFile(image+'.temp',function (err, data) {
-			data = new Buffer(data).toString('base64');
-			if(images.length > 0) $("#thumbs ul").append('<li><img src="data:image/png;base64,' + data + '" ></li>');
-			runCommand('rm' ,[image + '.temp'], function(result, error) {});
+	runCommand('identify' ,['-format', '%h',  path + image ], function(result, error) {
+		// images smaller than given thumbnail size
+		if(parseInt(result,10) < parseInt(thumbH,10)) {
+			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '" ></li>');
 			images.shift();
-			if(images.length > 0) callback(images,makeThumb);
-		});*/
-		if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '.temp' + '" ></li>');
-		runCommand('rm' ,[path + image + '.temp'], function(result, error) {});
-		images.shift();
-		if(images.length > 0) callback(path,images,makeThumb);
-	});
-}
-
-
-
-var thumbs = { 'a': { date: 'x', content: 'foo' } };
-
-function getPhoto(path, callback) {
-	var stats = fs.lstatSync(path);
-	if(thumbs[path] === undefined || thumbs[path].date.toString() !== stats.mtime.toString()) addThumb(path, stats.mtime, cb);
-	else callback(thumbs[path].content);
-}
-
-function addThumb(path, fileTime, callback) {
-	runCommand('convert' ,['-thumbnail', 'x120', path,path+'.temp'], function(result, error) {
-		var data = fs.readFileSync(path+'.temp'); 
-		thumbs[path] = { date: fileTime, content: data};
-		runCommand('rm' ,[path+'.th'], function(result, error) {
-			callback(thumbs[path].content);
+			if(images.length > 0) callback(path,images,makeThumb);
+			return;
+		}
+		runCommand('convert' ,['-thumbnail', 'x' + thumbH, path + image, path + image+'.temp'], function(result, error) {
+			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '.temp' + '" ></li>');
+			runCommand('rm' ,[path + image + '.temp'], function(result, error) {});
+			images.shift();
+			if(images.length > 0) callback(path,images,makeThumb);
 		});
 	});
 }
