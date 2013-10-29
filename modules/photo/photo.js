@@ -18,7 +18,7 @@ function showBig() {
 	var src = $("#curr_img").find('img').attr('src');
 	if(src !== 'undefined') src = getPath(src);
 	
-	$("#storage").append('<a data-scroll="' + $(document).scrollTop() + '"></a>');
+	$("#storage").append('<a data-enable_key="true" data-scroll="' + $(document).scrollTop() + '"></a>');
 	$('#thumbs').css({  display: 'none' });
 	$("#big").css({ "background-image": 'url("' + src + '")' });
 }

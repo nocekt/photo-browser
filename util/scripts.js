@@ -3,6 +3,7 @@
 document.onkeydown = function (e) {
 	// disable f5
   	if(e.keyCode === 116) return false;
+  	if(! $("#storage a").data("enable_key")) return;
   	else if(e.keyCode === 27 ) onEscape();
   	else if(e.keyCode === 37 ) onLeft();
   	else if(e.keyCode === 39 ) onRight();
@@ -50,7 +51,7 @@ function over_tree() {
 
 // file tree
 $(document).ready( function() {
-    $('#tree').fileTree({ root: '/home/tomasz/' }, function(file) {
+    $('#tree').fileTree({ root: '/home/' }, function(file) {
         alert(file);
     });
 });
