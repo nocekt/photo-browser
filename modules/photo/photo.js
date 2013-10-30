@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 
 function getPath(src) {
+	src = src.substr(0,src.lastIndexOf('?'));
 	var i = src.lastIndexOf('.');
 	if(i === -1) return src;
 	var base = src.substr(0,i);

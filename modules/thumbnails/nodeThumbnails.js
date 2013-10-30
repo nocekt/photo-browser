@@ -30,13 +30,14 @@ var makeThumb = function(path, images, callback) {
 	runCommand('identify' ,['-format', '%h',  path + image ], function(result, error) {
 		// images smaller than given thumbnail size
 		if(parseInt(result,10) < parseInt(thumbH,10)) {
-			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '" ></li>');
+			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '?' + new Date().getTime() + '" ></li>');
 			images.shift();
 			if(images.length > 0) callback(path,images,makeThumb);
 			return;
 		}
 		runCommand('convert' ,['-thumbnail', 'x' + thumbH, path + image, path + image+'.temp'], function(result, error) {
-			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '.temp' + '" ></li>');
+			console.log();
+			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '.temp?' + new Date().getTime() + '" ></li>');
 			runCommand('rm' ,[path + image + '.temp'], function(result, error) {});
 			images.shift();
 			if(images.length > 0) callback(path,images,makeThumb);
