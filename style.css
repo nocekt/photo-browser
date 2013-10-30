@@ -1,6 +1,6 @@
 body {
 	background: #333;
-	font-size: small;
+	font-size: 14px;
 }
 body::-webkit-scrollbar {
     display: none;
@@ -53,4 +53,5 @@ body::-webkit-scrollbar {
 	padding-top:20px;
 	left: 320px;
 	height: 90%;
+	background-color: #333;
 }

@@ -11,7 +11,7 @@ document.onkeydown = function (e) {
 
 
 // auto-resize
-function right_resize() {
+function width_resize() {
 	var x = $( window ).width() - 350;
 	if(x < 200) x=200;
 	else x = parseInt(x, 10);
@@ -20,21 +20,21 @@ function right_resize() {
     });
 }
 
-function tree_resize() {
-	var x = $( window ).height() - 200;
-	$('#tree').css({
-        height: x+'px'
-    });
+function height_resize() {
+	var x = $( window ).height();
+	$('#tree').css({ height: x-200+'px' });
+	$('#exif').css({ height: x-150+'px' });
 }
 
+
 $(document).ready(function () {
-    right_resize();
-    tree_resize();
+    width_resize();
+    height_resize();
 });
 
 $(window).resize(function () {
-    right_resize();
-    tree_resize();
+    width_resize();
+    height_resize();
 });
 
 
@@ -52,6 +52,6 @@ function over_tree() {
 // file tree
 $(document).ready( function() {
     $('#tree').fileTree({ root: '/home/' }, function(file) {
-        alert(file);
+		
     });
 });
