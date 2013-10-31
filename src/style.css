@@ -1,0 +1,57 @@
+body {
+	background: #333;
+	font-size: 14px;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#left {
+	display: inline-block;
+	width: 300px;
+	height: 300px;
+}
+
+#top-left {
+	-webkit-transform: translateZ(0);
+	position: fixed;
+	top: 35px;
+	left: 20px;
+	width: 280px;
+	height: 150px;
+}
+
+#camera {
+	display: inline-block;
+	position: absolute;
+	height: 60px;
+	width: inherit;
+}
+
+#camera input {
+	height: 55px;
+	width: auto;
+}
+
+#status {
+	display: inline-block;
+	position: absolute;
+	height: inherit;
+	margin: 0 0 0 20px;
+}
+
+#settings {
+	position: absolute;
+	top: 60px;
+	height: 60px;
+	width: inherit;
+}
+
+#right {
+	display: inline-block;
+	position: absolute;
+	padding-top:20px;
+	left: 320px;
+	height: 90%;
+	background-color: #333;
+}

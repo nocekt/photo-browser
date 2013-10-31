@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<title>photo-browser</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="class.css" />
+		<link rel="stylesheet" type="text/css" href="modules/fileTree/style.css" />
+		<link rel="stylesheet" type="text/css" href="modules/thumbnails/style.css" />
+		<link rel="stylesheet" type="text/css" href="modules/photo/style.css" />
+		<link rel="stylesheet" type="text/css" href="modules/exif/style.css" />
+		<script type="text/javascript" src="util/util.js"></script>
+		<script type="text/javascript" src="util/jquery.js"></script>
+		<script type="text/javascript" src="util/scripts.js"></script>
+		<script type="text/javascript" src="modules/fileTree/jqueryFileTree.js"></script>
+		<script type="text/javascript" src="modules/fileTree/nodeFileTree.js"></script>
+		<script type="text/javascript" src="modules/thumbnails/nodeThumbnails.js"></script>
+		<script type="text/javascript" src="modules/photo/photo.js"></script>
+		<script type="text/javascript" src="modules/exif/exif.js"></script>
+	</head>
+	<body>
+		<div id='left' class='normal_font'>
+			<div id="top-left" >
+				<div id="camera"> 
+					<input id="cam" class="button" type="image" src="img/bcam.png" title="camera mode"/>
+					<div id="status"> status: inactive </div>
+				</div>
+				<div id="settings"> </div>
+				<div id="path"> path: </div>
+			</div>
+			<div id='tree' onmouseover='over_tree()'> </div>
+			<div id='exif' > 
+				<table id='exif_table'>
+					<tbody>
+						<tr><td>Camera:</td><td></td></tr>
+						<tr><td>Create date:</td><td></td></tr>
+						<tr><td>File name:</td><td></td></tr>
+						<tr><td>Dimensions:</td><td></td></tr>
+						<tr><td>Focal distance:</td><td></td></tr>
+						<tr><td>Exposure time:</td><td></td></tr>
+						<tr><td>Aperture:</td><td></td></tr>
+						<tr><td>ISO:</td><td></td></tr>
+						<tr><td>EV:</td><td></td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="right">
+			<div id='thumbs'>
+				<ul></ul>
+			</div>
+			<div id="big" class="big_image"></div>
+			<div id="big_temp" class="big_image"></div>
+		</div>
+		<div id='storage'></div>
+	</body>
+</html>

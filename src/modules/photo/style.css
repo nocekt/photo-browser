@@ -1,0 +1,11 @@
+.big_image {
+	width: inherit;
+	height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#big_temp {
+	display: none;
+}
