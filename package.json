@@ -1,8 +1,0 @@
-{
-  "main": "index.html",
-  "name": "photo browser",
-  "window": {
-	"icon": "img/favicon.ico",
-	"toolbar": false
-  }
-}
