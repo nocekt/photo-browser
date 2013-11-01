@@ -36,11 +36,19 @@ var makeThumb = function(path, images, callback) {
 			return;
 		}
 		runCommand('convert' ,['-thumbnail', 'x' + thumbH, path + image, path + image+'.temp'], function(result, error) {
-			console.log();
 			if(images.length > 0) $("#thumbs ul").append('<li><img title="' + image + '" src="' + path + image + '.temp?' + new Date().getTime() + '" ></li>');
 			runCommand('rm' ,[path + image + '.temp'], function(result, error) {});
 			images.shift();
 			if(images.length > 0) callback(path,images,makeThumb);
+		});
+	});
+}
+
+function reloadCurrThumb(path,cb) {
+	runCommand('convert' ,['-thumbnail', 'x' + thumbH, path, path +'.temp'], function(result, error) {
+		$("#curr_img").find('img').attr('src',path + '.temp' + '?' + new Date().getTime());
+		runCommand('rm' ,[path + '.temp'], function(result, error) {
+			cb();
 		});
 	});
 }

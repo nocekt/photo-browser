@@ -3,10 +3,23 @@
 document.onkeydown = function (e) {
 	// disable f5
   	if(e.keyCode === 116) return false;
-  	if(! $("#storage a").data("enable_key")) return;
-  	else if(e.keyCode === 27 ) onEscape();
-  	else if(e.keyCode === 37 ) onLeft();
-  	else if(e.keyCode === 39 ) onRight();
+  	if($("#storage a").data("enable_key") !== true) return;
+  	$("#storage a").data("enable_key",false);
+  	
+  	if(e.keyCode === 27 ) onEscape();
+  	else if(e.keyCode === 37 ) onLeft(function() {
+		$("#storage a").data("enable_key",true);
+	});
+  	else if(e.keyCode === 39 ) onRight(function() {
+		$("#storage a").data("enable_key",true);
+	});
+	else if(e.keyCode === 188 ) onRotate(270,function() {
+		$("#storage a").data("enable_key",true);
+	});
+  	else if(e.keyCode === 190 ) onRotate(90,function() {
+		$("#storage a").data("enable_key",true);
+	});
+	else $("#storage a").data("enable_key",true);
 };
 
 

@@ -1,12 +1,14 @@
-function showExif(src) {
+function showExif(src, cb) {
 	$('#path').css({ display: 'none' });
 	$('#tree').css({  display: 'none' });
 	$('#exif').css({  display: 'inline' });
 	
 	var ExifImage = require('exif').ExifImage;
 	new ExifImage({ image : src }, function (error, exifData) {
-        if(error) return;
-        
+        if(error) {
+			if(cb !== undefined) cb();
+			return;
+		}
         var contents = [];
         contents.push(exifData.image.Model);
         var date = exifData.exif.CreateDate.split(' ');
@@ -25,6 +27,7 @@ function showExif(src) {
 			var row = table.rows[i];
 			row.cells[1].innerHTML = contents[i];
 		}
+		if(cb !== undefined) cb();
     });
 }
 

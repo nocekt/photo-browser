@@ -1,5 +1,5 @@
 #path {
-	font-size: small;
+	font-size: 13px;
 	position: absolute;
 	bottom: 0px;
 	height: 35px;
@@ -27,7 +27,7 @@
 }
 
 UL.jqueryFileTree {
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 18px;
 	padding: 0px;
 	margin: 0px;
