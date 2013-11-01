@@ -18,10 +18,17 @@ function getPath(src) {
 	else return src;
 }
 
+function smoothLoad(src) {
+	$('<img/>').attr('src', src).load(function() {
+		$(this).remove(); 
+		$("#big").css({ "background-image": 'url("' + src + '")' });
+	});
+}
+
 function showBig() {
 	var src = $("#curr_img").find('img').attr('src');
 	if(typeof src !== 'undefined') src = getPath(src);
-	$("#big").css({ "background-image": 'url("' + src + '")' });
+	smoothLoad(src);
 	showExif(src);
 }
 
@@ -47,7 +54,7 @@ function onLeft(cb) {
 	var src = $("#curr_img").find('img').attr('src');
 	if(typeof src !== 'undefined') {
 		src = getPath(src);
-		$("#big").css({ "background-image": 'url("' + src + '")' });
+		smoothLoad(src);
 		showExif(src,cb);
 	}
 	else {
@@ -64,7 +71,7 @@ function onRight(cb) {
 	var src = $("#curr_img").find('img').attr('src');
 	if(typeof src !== 'undefined') {
 		src = getPath(src);
-		$("#big").css({ "background-image": 'url("' + src + '")' });
+		smoothLoad(src);
 		showExif(src, cb);
 	}
 	else {
@@ -78,7 +85,7 @@ function onRotate(arg,cb) {
 	src = src.replace('url(','').replace('file://','').replace(')','');
 	src = getPath(src.toString());
 	runCommand('convert' ,['-rotate', arg, src, src], function(result, error) {
-		$("#big").css({ "background-image": 'url("' + src + '?' + new Date().getTime() + '")' });
+		smoothLoad(src + '?' + new Date().getTime());
 		reloadCurrThumb(src,cb);
 	});
 }
