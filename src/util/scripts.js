@@ -3,7 +3,7 @@
 document.onkeydown = function (e) {
 	// disable f5
   	if(e.keyCode === 116) return false;
-  	if($("#storage a").data("enable_key") !== true) return;
+  	if($("#storage a").data("enable_key") !== true) return false;
   	$("#storage a").data("enable_key",false);
   	
   	if(e.keyCode === 27 ) onEscape();
@@ -17,6 +17,9 @@ document.onkeydown = function (e) {
 		$("#storage a").data("enable_key",true);
 	});
   	else if(e.keyCode === 190 ) onRotate(90,function() {
+		$("#storage a").data("enable_key",true);
+	});
+	else if(e.keyCode === 46 ) onDelete(function() {
 		$("#storage a").data("enable_key",true);
 	});
 	else $("#storage a").data("enable_key",true);

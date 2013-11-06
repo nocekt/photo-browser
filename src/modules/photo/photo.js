@@ -33,7 +33,7 @@ function showBig() {
 }
 
 
-// functions called in /util/util.js
+// functions called in /util/scripts.js
 
 
 function onEscape() {
@@ -88,5 +88,25 @@ function onRotate(arg,cb) {
 		smoothLoad(src + '?' + new Date().getTime());
 		reloadCurrThumb(src,cb);
 	});
+}
+
+function deletePhoto(curr, cb) {
+	var src = curr.find('img').attr('src');
+	src = getPath(src);
+	runCommand('rm' ,[src], function(result, error) {
+		$('a[rel="' + src + '"]').parent().remove();
+		curr.remove();
+		cb();
+	});
+}
+
+function onDelete(cb) {
+	if(confirm("Are you sure ?")) {
+		var curr = $("#curr_img");
+		if(curr.next().find('img').attr('src') !== undefined) onRight(deletePhoto(curr,cb));
+		else if(curr.prev().find('img').attr('src') !== undefined) onLeft(deletePhoto(curr,cb));
+		else onEscape(deletePhoto(curr,cb));
+	}
+	else cb();
 }
 
