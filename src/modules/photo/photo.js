@@ -85,9 +85,11 @@ function onRotate(arg,cb) {
 	var src = $("#big").css('background-image');
 	src = src.replace('url(','').replace('file://','').replace(')','');
 	src = getPath(src.toString());
-	runCommand('convert' ,['-rotate', arg, src, src], function(result, error) {
-		smoothLoad(src);
-		reloadCurrThumb(src,cb);
+	require('child_process').exec('jpegtran -copy all -rotate ' + arg + ' ' + src +' > '+ src + '.temp' ,function(err,stdout,stderr){
+		runCommand('mv' ,[src + '.temp' , src], function(result, error) {
+			smoothLoad(src);
+			reloadCurrThumb(src,cb);
+		});
 	});
 }
 
