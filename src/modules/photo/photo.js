@@ -19,6 +19,7 @@ function getPath(src) {
 }
 
 function smoothLoad(src) {
+	src += '?' + new Date().getTime();
 	$('<img/>').attr('src', src).load(function() {
 		$(this).remove(); 
 		$("#big").css({ "background-image": 'url("' + src + '")' });
@@ -85,7 +86,7 @@ function onRotate(arg,cb) {
 	src = src.replace('url(','').replace('file://','').replace(')','');
 	src = getPath(src.toString());
 	runCommand('convert' ,['-rotate', arg, src, src], function(result, error) {
-		smoothLoad(src + '?' + new Date().getTime());
+		smoothLoad(src);
 		reloadCurrThumb(src,cb);
 	});
 }
