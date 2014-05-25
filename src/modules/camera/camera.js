@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $('#cam').click(function() {
 		
+		/* 
+		 * to be added in future
+		 * 
 		runCommand('gphoto2' ,["--auto-detect"], function(message, error) {
 			var res = message.toString().split('\n');
 			if(res.length == 3) {
@@ -10,6 +13,7 @@ $(document).ready(function () {
 			$("#status").text(res[2]);
 			camera_on();
 		});
+		*/ 
 	});
 });
 
