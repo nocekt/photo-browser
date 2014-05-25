@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="modules/thumbnails/style.css" />
 		<link rel="stylesheet" type="text/css" href="modules/photo/style.css" />
 		<link rel="stylesheet" type="text/css" href="modules/exif/style.css" />
+		<link rel="stylesheet" type="text/css" href="modules/camera/style.css" />
 		<script type="text/javascript" src="util/window.js"></script>
 		<script type="text/javascript" src="util/util.js"></script>
 		<script type="text/javascript" src="util/jquery.js"></script>
@@ -17,6 +18,7 @@
 		<script type="text/javascript" src="modules/thumbnails/nodeThumbnails.js"></script>
 		<script type="text/javascript" src="modules/photo/photo.js"></script>
 		<script type="text/javascript" src="modules/exif/exif.js"></script>
+		<script type="text/javascript" src="modules/camera/camera.js"></script>
 	</head>
 	<body>
 		<div id='left' class='normal_font'>
@@ -46,11 +48,23 @@
 			</div>
 		</div>
 		<div id="right">
-			<div id='thumbs'>
-				<ul></ul>
-			</div>
+			<div id='thumbs'><ul></ul></div>
 			<div id="big" class="big_image"></div>
-			<div id="big_temp" class="big_image"></div>
+			<div id="list">
+				<table id="myTable" class="zebra">
+					<thead>
+			        	<tr>
+			        		<th>Id</th>
+							<th>File</th>
+							<th>Date</th>
+							<th>Size</th>
+			            </tr>
+					</thead>
+			        <tbody> 
+					
+			        </tbody>
+				</table>
+			</div>
 		</div>
 		<div id='storage'></div>
 	</body>
