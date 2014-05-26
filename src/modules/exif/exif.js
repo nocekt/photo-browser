@@ -3,23 +3,48 @@ function showExif(src, cb) {
 	$('#tree').css({  display: 'none' });
 	$('#exif').css({  display: 'inline' });
 	
+	
+	
 	var ExifImage = require('exif').ExifImage;
+	
 	new ExifImage({ image : src }, function (error, exifData) {
+		
         if(error) {
 			if(cb !== undefined) cb();
 			return;
 		}
-        var contents = [];
-        contents.push(exifData.image.Model);
-        var date = exifData.exif.CreateDate.split(' ');
-        contents.push(date[0].replace(/:/g,'.') + ' ,\xa0\xa0\xa0' + date[1].substr(0,date[1].lastIndexOf(':')));
+		
+        var contents = []; 
+        
+		if(exifData.image.Model !== undefined) contents.push(exifData.image.Model);
+		else contents.push('');
+		
+        if(exifData.exif.CreateDate !== undefined) {
+			var date = exifData.exif.CreateDate.split(' ');
+			contents.push(date[0].replace(/:/g,'.') + ' ,\xa0\xa0\xa0' + date[1].substr(0,date[1].lastIndexOf(':')));
+        }
+        else contents.push('');
+        
         contents.push(src.substr(src.lastIndexOf('/')+1,src.length));
-        contents.push(exifData.exif.ExifImageWidth + ' x ' + exifData.exif.ExifImageHeight);
-        contents.push(exifData.exif.FocalLength + 'mm');
-        contents.push( parseFloat(exifData.exif.ExposureTime).toFixed(3) + ' s');
-        contents.push('f/' + exifData.exif.FNumber);
-        contents.push(exifData.exif.ISO);
-        contents.push(exifData.exif.ExposureCompensation + ' EV');
+        
+        if(exifData.exif.ExifImageWidth !== undefined) contents.push(exifData.exif.ExifImageWidth + ' x ' + exifData.exif.ExifImageHeight);
+        else contents.push('');
+        
+        if(exifData.exif.FocalLength !== undefined) contents.push(exifData.exif.FocalLength + 'mm');
+        else contents.push('');
+        
+        if(exifData.exif.ExposureTime !== undefined) contents.push( parseFloat(exifData.exif.ExposureTime).toFixed(3) + ' s');
+        else contents.push('');
+        
+        if(exifData.exif.FNumber !== undefined) contents.push('f/' + exifData.exif.FNumber);
+        else contents.push('');
+        
+        if(exifData.exif.ISO !== undefined) contents.push(exifData.exif.ISO);
+        else contents.push('');
+        
+        if(exifData.exif.ExposureCompensation !== undefined) contents.push(exifData.exif.ExposureCompensation + ' EV');
+        else contents.push('');
+        
         
 		var table = document.getElementById('exif_table');
 		var rowLength = table.rows.length;
